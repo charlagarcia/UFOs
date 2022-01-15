@@ -19,3 +19,25 @@ data.forEach((dataRow) => {
       }
     );
 });
+
+
+// grab datetime value from filter
+function handleClick() {
+    let date = d3.select("#datetime").property("value");
+    let filteredData = tableData;
+
+    //check to see if date was entered. 
+    //filter data by that date.
+    if (date) {
+        filteredData = filteredData.filter(row => row.datetime === date);
+    };
+
+    //rebuild table using filtered data
+    buildTable(filteredData);
+};
+
+// Attach an event to listen for the form button
+d3.selectAll("#filter-btn").on("click", handleClick);
+
+// Build the table when the page loads
+buildTable(tableData);
